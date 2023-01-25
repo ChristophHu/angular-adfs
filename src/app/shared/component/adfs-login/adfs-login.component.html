@@ -1,0 +1,29 @@
+<div class="flex flex-row w-full p-2 border-b border-gray-200">
+    <button *ngIf="!(isAuthenticated$ | async)" class="flex h-12 px-4 items-center text-light bg-primary rounded-lg" (click)="login()">
+        <div class="w-8 h-8 mr-2 stroke-1 stroke-current">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                <path d="M20 12h-13l3 -3m0 6l-3 -3" />
+            </svg>
+        </div>
+        Login
+    </button>
+    
+    <button *ngIf="(isAuthenticated$ | async)" class="flex h-12 px-4 items-center text-light bg-primary rounded-lg" (click)="logout()">
+        <div class="w-8 h-8 mr-2 stroke-1 stroke-current">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                <path d="M7 12h14l-3 -3m0 6l3 -3" />
+            </svg>
+        </div>
+        Logout
+    </button>
+</div>
+
+<div class="flex flex-col border-b border-gray-200 text-gray-300">
+    <div>authenticated: {{ ( isAuthenticated$ | async )}}</div>
+    <div>isDoneLoading: {{ ( isDoneLoading$ | async ) }}</div>
+    <div>canActivateProtectedRoutes: {{ ( canActivateProtectedRoutes$ | async ) }}</div>
+</div>
