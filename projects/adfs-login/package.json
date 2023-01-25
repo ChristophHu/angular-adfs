@@ -1,0 +1,27 @@
+{
+  "name": "adfs-login",
+  "version": "15.1.0",
+  "author": {
+    "name": "Christoph Huschenhoefer <info@block-code.de>",
+    "url": "http://www.block-code.de/"
+  },
+  "description": "ADFS-Login using oauth2.",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^15.1.0",
+    "@angular/core": "^15.1.0"
+  },
+  "dependencies": {
+    "angular-oauth2-oidc": "^15.0.1",
+    "tslib": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChristophHu/angular-adfs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ChristophHu/angular-adfs/issues"
+  },
+  "homepage": "https://github.com/ChristophHu/angular-adfs#readme",
+  "sideEffects": false
+}
