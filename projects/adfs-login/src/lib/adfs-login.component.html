@@ -7,7 +7,6 @@
                 <path d="M20 12h-13l3 -3m0 6l-3 -3" />
             </svg>
         </div>
-        Login
     </button>
     
     <button *ngIf="(isAuthenticated$ | async)" class="flex h-12 px-4 items-center text-light bg-primary rounded-lg" (click)="logout()">
@@ -18,12 +17,5 @@
                 <path d="M7 12h14l-3 -3m0 6l3 -3" />
             </svg>
         </div>
-        Logout
     </button>
-</div>
-
-<div class="flex flex-col border-b border-gray-200 text-gray-300">
-    <div>authenticated: {{ ( isAuthenticated$ | async )}}</div>
-    <div>isDoneLoading: {{ ( isDoneLoading$ | async ) }}</div>
-    <div>canActivateProtectedRoutes: {{ ( canActivateProtectedRoutes$ | async ) }}</div>
 </div>

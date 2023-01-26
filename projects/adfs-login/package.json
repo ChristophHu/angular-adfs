@@ -2,8 +2,7 @@
   "name": "adfs-login",
   "version": "15.1.0",
   "author": {
-    "name": "Christoph Huschenhoefer <info@block-code.de>",
-    "url": "http://www.block-code.de/"
+    "name": "Christoph Huschenhoefer"
   },
   "description": "ADFS-Login using oauth2.",
   "license": "MIT",
