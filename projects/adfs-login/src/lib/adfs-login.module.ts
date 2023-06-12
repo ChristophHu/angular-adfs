@@ -31,7 +31,7 @@ export function storageFactory(): OAuthStorage {
     OAuthService
   ]
 })
-export class AdfsLoginLibraryModule {
+export class AdfsLoginModule {
   // static forRoot(): ModuleWithProviders<AdfsLoginLibraryModule> {
   //   return {
   //     ngModule: AdfsLoginLibraryModule,
@@ -43,9 +43,9 @@ export class AdfsLoginLibraryModule {
   //     ]
   //   };
   // }
-  static forRoot(authConfig: AuthConfig, authModuleConfig: OAuthModuleConfig): ModuleWithProviders<AdfsLoginLibraryModule> {
+  static forRoot(authConfig: AuthConfig, authModuleConfig: OAuthModuleConfig): ModuleWithProviders<AdfsLoginModule> {
     return {
-      ngModule: AdfsLoginLibraryModule,
+      ngModule: AdfsLoginModule,
       providers: [
         { provide: APP_INITIALIZER, useFactory: authAppInitializerFactory, deps: [AuthService], multi: true },
         { provide: AuthConfig, useValue: authConfig },

@@ -8,9 +8,11 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { RouterModule, Routes } from '@angular/router';
 import { PageWithAuthGuardComponent } from './modules/test/page-with-auth-guard/page-with-auth-guard.component';
 import { PageWithAuthWithForcedLoginGuardComponent } from './modules/test/page-with-auth-with-forced-login-guard/page-with-auth-with-forced-login-guard.component';
-import { AdfsLoginLibraryModule, AuthGuard, AuthWithForcedLoginGuard } from 'projects/adfs-login-library/src/public-api';
 import { PageWithNoGuardComponent } from './modules/test/page-with-no-guard/page-with-no-guard.component';
 import { authConfig, authModuleConfig } from './auth.config';
+import { AdfsLoginModule, AuthGuard, AuthWithForcedLoginGuard } from '@christophhu/adfs-login';
+// import { AdfsLoginModule, AuthGuard, AuthWithForcedLoginGuard } from 'dist/adfs-login/public-api';
+// import { AdfsLoginModule, AuthGuard, AuthWithForcedLoginGuard } from 'projects/adfs-login/src/public-api';
 
 const routes: Routes = [
   { path: 'authguard', component: PageWithAuthGuardComponent, canActivate: [AuthGuard] },  
@@ -27,7 +29,7 @@ const routes: Routes = [
     PageWithNoGuardComponent
   ],
   imports: [
-    AdfsLoginLibraryModule.forRoot(
+    AdfsLoginModule.forRoot(
       authConfig,
       authModuleConfig
     ),

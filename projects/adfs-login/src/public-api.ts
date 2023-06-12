@@ -1,5 +1,5 @@
 /*
- * Public API Surface of adfs-login-library
+ * Public API Surface of adfs-login
  */
 
 export * from './lib/services/auth.service'

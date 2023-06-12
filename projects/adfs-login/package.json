@@ -1,5 +1,5 @@
 {
-  "name": "@lab-code.de/adfs-login-library",
+  "name": "@christophhu/adfs-login",
   "version": "1.0.1",
   "description": "ADFS-Login using oauth2.",
   "license": "MIT",
@@ -9,10 +9,10 @@
   },
   "peerDependencies": {
     "@angular/common": "^15.1.0",
-    "@angular/core": "^15.1.0"
+    "@angular/core": "^15.1.0",
+    "angular-oauth2-oidc": "^15.0.1"
   },
   "dependencies": {
-    "angular-oauth2-oidc": "^15.0.1",
     "tslib": "^2.3.0"
   },
   "repository": {
