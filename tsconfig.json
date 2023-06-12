@@ -3,8 +3,9 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "adfs-login": [
-        "dist/adfs-login"
+      "adfs-login-library": [
+        "dist/adfs-login-library",
+        "dist/adfs-login-library"
       ]
     },
     "baseUrl": "./",

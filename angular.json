@@ -3,34 +3,35 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-adfs": {
+    "adfs-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "sass"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/adfs-demo",
+      "sourceRoot": "projects/adfs-demo/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-adfs",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "outputPath": "dist/adfs-demo",
+            "index": "projects/adfs-demo/src/index.html",
+            "main": "projects/adfs-demo/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "projects/adfs-demo/tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/adfs-demo/src/favicon.ico",
+              "projects/adfs-demo/src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "projects/adfs-demo/src/custom-theme.scss",
+              "projects/adfs-demo/src/styles.sass"
             ],
             "scripts": []
           },
@@ -65,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-adfs:build:production"
+              "browserTarget": "adfs-demo:build:production"
             },
             "development": {
-              "browserTarget": "angular-adfs:build:development"
+              "browserTarget": "adfs-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-adfs:build"
+            "browserTarget": "adfs-demo:build"
           }
         },
         "test": {
@@ -86,37 +87,37 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "tsconfig.spec.json",
+            "tsConfig": "projects/adfs-demo/tsconfig.spec.json",
             "inlineStyleLanguage": "sass",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/adfs-demo/src/favicon.ico",
+              "projects/adfs-demo/src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "projects/adfs-demo/src/styles.sass"
             ],
             "scripts": []
           }
         }
       }
     },
-    "adfs-login": {
+    "adfs-login-library": {
       "projectType": "library",
-      "root": "projects/adfs-login",
-      "sourceRoot": "projects/adfs-login/src",
+      "root": "projects/adfs-login-library",
+      "sourceRoot": "projects/adfs-login-library/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/adfs-login/ng-package.json"
+            "project": "projects/adfs-login-library/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/adfs-login/tsconfig.lib.prod.json"
+              "tsConfig": "projects/adfs-login-library/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/adfs-login/tsconfig.lib.json"
+              "tsConfig": "projects/adfs-login-library/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -124,7 +125,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/adfs-login/tsconfig.spec.json",
+            "tsConfig": "projects/adfs-login-library/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

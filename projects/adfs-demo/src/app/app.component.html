@@ -1,0 +1,28 @@
+<div class="container mx-auto">
+  <adfs-login-button>
+    <div class="flex flex-row w-32 px-4 py-2 items-center justify-between bg-blue-400 rounded cursor-pointer" login>
+      <div class="h-6 w-6 stroke-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+        </svg>
+      </div>
+      <span>Login</span>
+    </div>
+    <div class="flex flex-row w-32 px-4 py-2 items-center justify-between bg-red-400 rounded cursor-pointer" logout>
+      <div class="h-6 w-6 stroke-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+        </svg>
+      </div>
+      <span>Logout</span>
+    </div>
+  </adfs-login-button>
+
+  <div [routerLink]="['/']" routerLinkActive="active-link">PageWithNoGuard</div>
+  <div [routerLink]="['/authguard']" routerLinkActive="active-link">PageWithAuthGuard</div>
+  <div [routerLink]="['/authwithforcedloginguard']" routerLinkActive="active-link">PageWithAuthWithForcedLoginGuard</div>    
+</div>
+
+<div class="container mx-auto p-4 bg-gray-100 border border-gray-300 rounded-lg">
+  <router-outlet></router-outlet>
+</div>

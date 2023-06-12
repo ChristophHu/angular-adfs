@@ -1,23 +1,5 @@
 # AngularAdfs
 
-- `"angular-oauth2-oidc": "^15.0.1"` to `package.json`
-- `npm i`
-
-## Vorbereitung
-Nach dem Start erfolgt durch Login eine Umleitung auf 
-`https://dc2019.poldom.local/adfs/oauth2/authorize/?response_type=code&client_id=633d0b2d-a45e-4e9a-9288-64344f5d19fc&state=OEZka3BnVXk4NWNWT0JEb0o4X2dBRWRzb2N3Q1pPRkE2WUY5dVdIcU0udklTsemicolon%252Fbasics%252Fhome&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F&scope=openid%20profile%20email%20api&code_challenge=1Rt8g2jGtqSyMavyBJMrSptMal2fes_mx1WAj-1aE1w&code_challenge_method=S256&nonce=OEZka3BnVXk4NWNWT0JEb0o4X2dBRWRzb2N3Q1pPRkE2WUY5dVdIcU0udklT`
-
-Nach der Eingabe der `poldom.local` Logindaten:
-`2422...@poldom.local` und dem Kennwort erfolgt ein Login.
-
-Swagger: `https://dc2019.poldom.local/test_service/swagger/index.html`
-
-In Swagger muss dann bei `Authorize` dann der Haken bei `openid` gesetzt werden.
-
-Man ist angemeldet und kommt auf die Admin-Page.
-
-
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
 
 ## Development server
