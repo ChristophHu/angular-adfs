@@ -1,12 +1,17 @@
 {
   "name": "@christophhu/adfs-login",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ADFS-Login using oauth2.",
   "license": "MIT",
   "author": {
     "name": "Christoph Huschenhoefer",
     "email": "christoph@lab-code.de"
   },
+  "keywords": [
+    "angular",
+    "adfs",
+    "oauth2"
+  ],
   "peerDependencies": {
     "@angular/common": "^15.1.0",
     "@angular/core": "^15.1.0",

@@ -1,24 +1,48 @@
 # AdfsLogin
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.0.
+## Use
+Import the `AdfsLoginModule` in the `app.module.ts`.
+```typescript
+    imports: [
+        AdfsLoginModule.forRoot(
+            authConfig,
+            authModuleConfig
+        ),
+        ...
+    ]
+```
+The `authConfig` and `authModuleConfig` are seperated into an config with the following content:
+```typescript
+import { AuthConfig } from 'angular-oauth2-oidc';
+import { OAuthModuleConfig } from 'angular-oauth2-oidc';
 
-## Code scaffolding
+export const authModuleConfig: OAuthModuleConfig = {
+  resourceServer: {
+    allowedUrls: [
+      'https://dc2019.poldom.local/adfstestapi',
+      'http://localhost:4200'
+    ],
+    sendAccessToken: true,
+  }
+}
 
-Run `ng generate component component-name --project adfs-login` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project adfs-login`.
-> Note: Don't forget to add `--project adfs-login` or else it will be added to the default project in your `angular.json` file. 
+export const authConfig: AuthConfig = {
+  issuer        : 'https://dc2019.poldom.local/adfs',
+  clientId      : '0050e983-4a4e-4076-8d0d-a1b625c4aa06',
+  redirectUri   : 'http://localhost:4200/',
+  scope         : 'openid profile email api',
+  useSilentRefresh: false,
+  silentRefreshTimeout: 0
+}
+```
 
-## Build
+## Guards
+There are two Guards:
+1. AuthGuard and
+2. AuthWithForcedLoginGuard
 
-Run `ng build adfs-login` to build the project. The build artifacts will be stored in the `dist/` directory.
+### AuthGuard
+The AuthGuard will route you if you are logged in. If you are not logged in, that guard interrupt the route-process.
 
-## Publishing
-
-After building your library with `ng build adfs-login`, go to the dist folder `cd dist/adfs-login` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test adfs-login` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### AuthWithForcedLoginGuard
+Like the AuthGuard the AuthWithForcedLoginGuard will route you if you are logged in. If not, this will route you to the login-page.
