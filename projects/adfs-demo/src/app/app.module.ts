@@ -11,6 +11,7 @@ import { PageWithAuthWithForcedLoginGuardComponent } from './modules/test/page-w
 import { PageWithNoGuardComponent } from './modules/test/page-with-no-guard/page-with-no-guard.component';
 import { authConfig, authModuleConfig } from './auth.config';
 import { AdfsLoginModule, AuthGuard, AuthWithForcedLoginGuard } from '@christophhu/adfs-login';
+import { httpInterceptorProviders } from './core/interceptors';
 // import { AdfsLoginModule, AuthGuard, AuthWithForcedLoginGuard } from 'dist/adfs-login/public-api';
 // import { AdfsLoginModule, AuthGuard, AuthWithForcedLoginGuard } from 'projects/adfs-login/src/public-api';
 
@@ -40,6 +41,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
   ],
   providers: [
+    httpInterceptorProviders
     // { provide: OAuthStorage, useValue: localStorage }
   ],
   bootstrap: [AppComponent]
