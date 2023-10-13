@@ -81,8 +81,8 @@ export class AuthService {
 
   public runInitialLoginSequence(): Promise<void> {
     if (location.hash) {
-      console.log('Encountered hash fragment, plotting as table...')
-      console.table(location.hash.substr(1).split('&').map(kvp => kvp.split('=')))
+      // console.log('Encountered hash fragment, plotting as table...')
+      // console.table(location.hash.substr(1).split('&').map(kvp => kvp.split('=')))
     }
 
     // 0. LOAD CONFIG:
@@ -100,7 +100,7 @@ export class AuthService {
 
       .then(() => {
         if (this.oauthService.hasValidAccessToken()) {
-          console.log('hasValidAccessToken')
+          // console.log('hasValidAccessToken')
           return Promise.resolve()
         }
 
@@ -109,7 +109,7 @@ export class AuthService {
         // needing to redirect the user:
         return this.oauthService.silentRefresh()
           .then(() => {
-            console.log('silentRefresh')
+            // console.log('silentRefresh')
             Promise.resolve()
           })
           .catch(result => {
@@ -134,7 +134,7 @@ export class AuthService {
               // this.login()
               //
               // Instead, we'll now do this:
-              console.warn('User interaction is needed to log in, we will wait for the user to manually log in.')
+              // console.warn('User interaction is needed to log in, we will wait for the user to manually log in.')
               return Promise.resolve()
             }
 
@@ -165,7 +165,7 @@ export class AuthService {
   public login(targetUrl?: string) {
     // Note: before version 9.1.0 of the library you needed to
     // call encodeURIComponent on the argument to the method.
-    console.log('login in auth.service')
+    // console.log('login in auth.service')
     this.oauthService.initLoginFlow(targetUrl || this.router.url)
   }
 

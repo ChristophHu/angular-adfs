@@ -7,6 +7,8 @@ import { AuthWithForcedLoginGuard } from './guards/auth-with-forced-login.guard'
 import { AuthGuard } from './guards/auth.guard';
 import { authAppInitializerFactory } from './services/auth-app-initializer.factory';
 import { AuthService } from './services/auth.service';
+import { LdapConfig } from './model/ldap.model';
+import { LdapService } from './services/ldap.service';
 
 // We need a factory since localStorage is not available at AOT build time
 export function storageFactory(): OAuthStorage {
@@ -43,15 +45,17 @@ export class AdfsLoginModule {
   //     ]
   //   };
   // }
-  static forRoot(authConfig: AuthConfig, authModuleConfig: OAuthModuleConfig): ModuleWithProviders<AdfsLoginModule> {
+  static forRoot(authConfig: AuthConfig, authModuleConfig: OAuthModuleConfig, ldapConfig: LdapConfig): ModuleWithProviders<AdfsLoginModule> {
     return {
       ngModule: AdfsLoginModule,
       providers: [
         { provide: APP_INITIALIZER, useFactory: authAppInitializerFactory, deps: [AuthService], multi: true },
         { provide: AuthConfig, useValue: authConfig },
         { provide: OAuthModuleConfig, useValue: authModuleConfig },
-        { provide: OAuthStorage, useFactory: storageFactory }
+        { provide: OAuthStorage, useFactory: storageFactory },
+        // LdapService, { provide: 'ldapConfig', useValue: ldapConfig }
+        { provide: LdapConfig, useValue: ldapConfig }
       ]
-    };
+    }
   }
 }

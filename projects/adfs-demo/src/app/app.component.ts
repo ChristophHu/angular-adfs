@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { authConfig } from './auth.config';
-import { BehaviorSubject, filter } from 'rxjs';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { LdapService } from 'projects/adfs-login/src/public-api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   
-  constructor() { }
+  constructor(private _ldapService: LdapService) { }
+
+  ngOnInit(): void {
+    this._ldapService.getUserData('24225132').then((data) => {
+      console.log(data);
+    });
+  }
 }
