@@ -11,7 +11,8 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(req.url)
+
+
     if (!req.url.includes(paths.error)) {
       return next.handle(req);
     }
@@ -19,6 +20,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       retry(2),
       catchError((error: HttpErrorResponse) => {
+        // 200 is not an error
+        if (error.status == 200) return next.handle(req)
+
         if (error.status !== 401) {
           // 401 handled in auth.interceptor
         }

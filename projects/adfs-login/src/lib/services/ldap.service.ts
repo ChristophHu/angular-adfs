@@ -1,91 +1,67 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { LdapConfig } from '../model/ldap.model';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { timeout } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LdapService {
 
-  // constructor(@Inject('ldapConfig') private ldapConfig: LdapConfig) {
-  //   console.log(ldapConfig)
-  // }
+  config: any
 
-  backendUrl?: string = "https://ldapinfo-lb.int.polizei.berlin.de/ldap_service";
-  userData?:any;
-
-  constructor(private oauthService: OAuthService, private http: HttpClient, @Optional() ldapConfig?: LdapConfig) {
+  constructor(private http: HttpClient, @Optional() ldapConfig: LdapConfig) {
     console.log(ldapConfig)
+    this.config = ldapConfig
   }
 
-  public getUserData(persnr: string, attributes: string[] = 
-    ["samaccountname", 
-     "displayName","sn","givenName",
-     "department","extensionAttribute2","extensionattribute1",
-     "extensionAttribute4","jpegPhoto","thumbnailPhoto",
- //    "postalCode","l","facsimileTelephoneNumber","st","telephoneNumber","mail","mobile","streetAddress","title","distinguishedName", 
-     "office" ]): Promise<any> {
-    return new Promise((resolve, reject) => {
-      
-      if (this.userData)
-      {
-        console.log(this.userData)
-        resolve(this.userData);
-        return;
-      }
-
-      let params = { filter: persnr, attributes: attributes };
-      this.http.post(`${this.backendUrl}/ldap/lookup`, params, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Authorization': 'Bearer ' + this.oauthService.getAccessToken()
+  public getAuthtest(): Observable<any> {
+    return new Observable((observer) => {
+      this.http.get(`${this.config.backendUrl}${this.config.authtest}`)
+      .subscribe({
+        next: (data: any) => {         
+          observer.next(data)
+          console.log('getAuthtest: ', data)
         },
-        observe: 'response'
+        error: (error:any)=>{ 
+          observer.error(error)
+        }
       })
-      .pipe(timeout(30000))
-      .subscribe(
-        {
-          next:(data:HttpResponse<any>)=>{         
-            this.userData=data.body;    
-            console.log(data.body)
-            resolve(data.body);
-          },
-          error:(error:any)=>{reject(error);}
-        });
-    });
+    })
   }
 
-  public isMemberOf(persnr:string, groupdn: string) : Promise<boolean> {
-    return new Promise((resolve, reject) => {
-    
-      let params = {
-        "samaccountname": persnr,
-        "groupdn": groupdn
-      };
+  public getUserData(persnr: string, attributes: string[]): Observable<any> {
+    return new Observable((observer) => {
+      let params = { filter: persnr, attributes: attributes }
 
-      this.http.post(`${this.backendUrl}/ldap/memberof`, params, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Authorization': 'Bearer ' + this.oauthService.getAccessToken()
+      this.http.post(`${this.config.backendUrl}${this.config.user_path}`, params)
+      .subscribe({
+        next: (data: any) => {         
+          observer.next(data)
         },
-        observe: 'response'
+        error: (error:any)=>{ 
+          observer.error(error)
+        }
       })
+    })
+  }
+
+  public isMemberOf(persnr:string, groupdn: string): Observable<boolean> {
+    return new Observable((observer) => {
+      let params = { "samaccountname": persnr, "groupdn": groupdn }
+
+      this.http.post(`${this.config.backendUrl}${this.config.user_path}`, params)
       .pipe(timeout(10000))
-      .subscribe(
-        {
-          next:(data:HttpResponse<any>)=>{                    
-            resolve(true);
-          },
-          error:(error:any)=>{
-            resolve(false);
-          }
-        });
-    });
-
-   
+      .subscribe({
+        next: (data: any) => {  
+          console.log('isMemberOf: ', data)                  
+          observer.next(true)
+        },
+        error:(error:any)=>{
+          observer.next(false)
+        }
+      })
+    })
   }
 }

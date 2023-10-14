@@ -10,17 +10,19 @@ import { paths } from "./const";
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.header)) {
-      return next.handle(req);
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (!req.url.includes("header")) {
+      return next.handle(req)
     }
-    console.warn("HeaderInterceptor");
+    console.warn("HeaderInterceptor")
 
-    const modified = req.clone({ setHeaders: { "X-Man": "Wolverine" } });
+    const modified = req.clone({ 
+      setHeaders: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      } 
+    })
 
-    return next.handle(modified);
+    return next.handle(modified)
   }
 }

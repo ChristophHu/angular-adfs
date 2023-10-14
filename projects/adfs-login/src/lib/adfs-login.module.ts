@@ -8,7 +8,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { authAppInitializerFactory } from './services/auth-app-initializer.factory';
 import { AuthService } from './services/auth.service';
 import { LdapConfig } from './model/ldap.model';
-import { LdapService } from './services/ldap.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+// import { httpInterceptorProviders } from './interceptors';
 
 // We need a factory since localStorage is not available at AOT build time
 export function storageFactory(): OAuthStorage {
@@ -34,17 +36,6 @@ export function storageFactory(): OAuthStorage {
   ]
 })
 export class AdfsLoginModule {
-  // static forRoot(): ModuleWithProviders<AdfsLoginLibraryModule> {
-  //   return {
-  //     ngModule: AdfsLoginLibraryModule,
-  //     providers: [
-  //       { provide: APP_INITIALIZER, useFactory: authAppInitializerFactory, deps: [AuthService], multi: true },
-  //       { provide: AuthConfig, useValue: authConfig },
-  //       { provide: OAuthModuleConfig, useValue: authModuleConfig },
-  //       { provide: OAuthStorage, useFactory: storageFactory }
-  //     ]
-  //   };
-  // }
   static forRoot(authConfig: AuthConfig, authModuleConfig: OAuthModuleConfig, ldapConfig: LdapConfig): ModuleWithProviders<AdfsLoginModule> {
     return {
       ngModule: AdfsLoginModule,
@@ -53,8 +44,8 @@ export class AdfsLoginModule {
         { provide: AuthConfig, useValue: authConfig },
         { provide: OAuthModuleConfig, useValue: authModuleConfig },
         { provide: OAuthStorage, useFactory: storageFactory },
-        // LdapService, { provide: 'ldapConfig', useValue: ldapConfig }
-        { provide: LdapConfig, useValue: ldapConfig }
+        { provide: LdapConfig, useValue: ldapConfig },
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
       ]
     }
   }
